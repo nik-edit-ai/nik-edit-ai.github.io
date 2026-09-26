@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Никита Григорьев · монтаж и AI-видео</title>
+<meta name="description" content="Видеомонтажёр и AI-креатор из Санкт-Петербурга. Беру реальные кадры и доснимаю нейросетью: AI-реклама, Reels, ТВ-ролики и монтаж под ключ.">
+<meta property="og:title" content="Никита Григорьев · монтаж и AI-видео">
+<meta property="og:description" content="Там, где заканчивается камера, начинается генерация. Реклама, Reels, ТВ-ролики и монтаж под ключ.">
+<meta property="og:image" content="media/og.jpg">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0c0b'/%3E%3Crect x='7' y='8' width='8' height='16' rx='2' fill='%23ff7a2e'/%3E%3Crect x='17' y='8' width='8' height='16' rx='2' fill='%23ff3ea5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+<!-- Верхняя панель: логотип, навигация, таймкод прокрутки -->
+<header class="bar">
+  <a href="#top" class="logo" aria-label="nik.edit.ai, наверх">
+    <span class="logo-mark"><i></i><i></i></span>nik.edit.ai
+  </a>
+  <nav class="nav">
+    <a href="#works">Работы</a>
+    <a href="#approach">Подход</a>
+    <a href="#services">Услуги</a>
+    <a href="#reviews">Отзывы</a>
+  </nav>
+  <div class="tc" aria-hidden="true"><span class="rec"></span><span id="tc">00:00:00:00</span></div>
+  <a href="https://t.me/NikEditAi" class="btn btn-sm" target="_blank" rel="noopener">Написать</a>
+  <div class="ruler" aria-hidden="true"><div class="ruler-fill" id="ruler"></div></div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Никита Григорьев · монтажёр и AI-креатор · Санкт-Петербург</p>
+    <h1>Там, где заканчивается <span class="w-real">камера</span>, начинается <span class="w-ai">генерация</span></h1>
+    <p class="lead">Беру реальные кадры, доснимаю нейросетью то, что камера снять не может, и свожу всё в DaVinci так, чтобы шва не было видно. AI-реклама, Reels, ТВ-ролики и монтаж под ключ.</p>
+    <div class="hero-cta">
+      <button class="btn" data-play="showreel-h">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Шоурил 0:34
+      </button>
+      <a href="https://t.me/NikEditAi" class="btn btn-ghost" target="_blank" rel="noopener">Обсудить ролик</a>
+    </div>
+    <ul class="hero-facts">
+      <li><b>ТВ · Reels</b><span>ролики под любую площадку</span></li>
+      <li><b>−14 / −23</b><span>LUFS: мастера для сетей и ТВ</span></li>
+      <li><b>3 этапа</b><span>материал · генерация · монтаж</span></li>
+    </ul>
+  </div>
+
+  <figure class="seam" id="seam" aria-label="Сравнение: реальный кадр и тот же кадр после нейросети">
+    <img src="media/hero-ai.jpg" alt="Тот же двор в стиле Vice City: неон, пальмы, розовый закат" class="seam-ai" draggable="false">
+    <div class="seam-real" id="seamReal">
+      <img src="media/hero-real.jpg" alt="Двор в Петербурге, снято на iPhone" draggable="false">
+    </div>
+    <div class="seam-line" id="seamLine"><span class="seam-knob" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+    <span class="tag tag-real seam-tag-l">Реальность · iPhone</span>
+    <span class="tag tag-ai seam-tag-r">AI · Vice City</span>
+    <input type="range" min="0" max="100" value="50" id="seamRange" class="seam-range" aria-label="Положение шва между реальностью и AI">
+    <figcaption>Тяни шов. Один и тот же кадр: слева снято во дворе в Питере, справа - после нейросети. <a href="#" data-play="gta">Смотреть ролик →</a></figcaption>
+  </figure>
+</section>
+
+<!-- Шоурил-лента -->
+<section class="reel" aria-label="Шоурил">
+  <video class="reel-video" src="media/showreel-h-loop.mp4" poster="media/showreel-h.jpg" autoplay muted loop playsinline></video>
+  <div class="reel-over">
+    <span class="marker">SHOWREEL · 2026</span>
+    <button class="btn btn-light" data-play="showreel-h">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Со звуком
+    </button>
+  </div>
+</section>
+
+<!-- РАБОТЫ -->
+<section class="section" id="works">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v1"></span>V1 · Работы</p>
+    <h2>Реальные кадры, генерации и монтаж, который их склеивает</h2>
+  </div>
+  <div class="filters" role="tablist" aria-label="Фильтр работ">
+    <button class="chip is-on" data-filter="all" role="tab" aria-selected="true">Все</button>
+    <button class="chip" data-filter="air" role="tab" aria-selected="false">AI × Реальность</button>
+    <button class="chip" data-filter="ads" role="tab" aria-selected="false">Реклама</button>
+    <button class="chip" data-filter="ai" role="tab" aria-selected="false">Полностью AI</button>
+    <button class="chip" data-filter="edit" role="tab" aria-selected="false">Монтаж</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ПОДХОД -->
+<section class="section approach" id="approach">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v2"></span>V2 · Подход</p>
+    <h2>Ролик в три этапа. У каждого своя дорожка</h2>
+    <p class="sec-sub">Я не генерирую «что получится». Сначала раскадровка, потом реальный кадр, потом нейросеть дорисовывает то, что камера снять не может. И только монтаж превращает это в историю.</p>
+  </div>
+
+  <div class="tl" id="tl" aria-hidden="true">
+    <div class="tl-ruler"><span>00:00</span><span>ЭТАП 1</span><span>ЭТАП 2</span><span>ЭТАП 3</span></div>
+    <div class="tl-track"><em>V3</em><div class="tl-clip c-text" style="--s:70%;--w:26%">титры · графика</div></div>
+    <div class="tl-track"><em>V2</em><div class="tl-clip c-ai" style="--s:34%;--w:34%">AI · генерации</div></div>
+    <div class="tl-track"><em>V1</em><div class="tl-clip c-real" style="--s:2%;--w:32%">исходники · раскадровка</div><div class="tl-clip c-real" style="--s:68%;--w:30%">монтаж</div></div>
+    <div class="tl-track"><em>A1</em><div class="tl-clip c-audio" style="--s:2%;--w:96%"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 10 Q5 2 10 10 T20 10 T30 10 T40 10 T50 10 T60 10 T70 10 T80 10 T90 10 T100 10 T110 10 T120 10 T130 10 T140 10 T150 10 T160 10 T170 10 T180 10 T190 10 T200 10 T210 10 T220 10 T230 10 T240 10 T250 10 T260 10 T270 10 T280 10 T290 10 T300 10 T310 10 T320 10 T330 10 T340 10 T350 10 T360 10 T370 10 T380 10 T390 10 T400 10"/></svg></div></div>
+    <div class="tl-head" id="tlHead"></div>
+  </div>
+
+  <ol class="steps">
+    <li class="step">
+      <span class="step-n">01</span>
+      <h3>Материал</h3>
+      <p>Начинаем с раскадровки. Основа - ваши исходники: видео с телефона, фото продукта, рендеры, записи спикера. Подскажу, как снять на телефон, чтобы нейросеть подхватила кадр чисто. Нет исходников - соберу ролик целиком из генераций.</p>
+      <span class="step-tag tag-real">реальность</span>
+    </li>
+    <li class="step">
+      <span class="step-n">02</span>
+      <h3>Генерация</h3>
+      <p>Беру реальный кадр и дорисовываю то, что камера снять не может: другую эпоху, неон, монстра из телевизора. Nano Banana, Seedance, Kling, Veo - под задачу, а не по привычке.</p>
+      <span class="step-tag tag-ai">AI</span>
+    </li>
+    <li class="step">
+      <span class="step-n">03</span>
+      <h3>Монтаж</h3>
+      <p>DaVinci Resolve: ритм, цвет, титры, звук. Сдаю мастер под площадку: −14 LUFS для соцсетей, −23 LUFS по EBU R128 для телевидения.</p>
+      <span class="step-tag tag-edit">монтаж</span>
+    </li>
+  </ol>
+
+  <div class="rules">
+    <p class="rule"><b>Либо круто, либо переделываю.</b> Слабую генерацию не спасаю монтажом, а генерирую заново.</p>
+    <p class="rule"><b>Реальность в основе.</b> Живой кадр держит доверие зрителя, AI добавляет то, ради чего досматривают.</p>
+    <p class="rule"><b>Делаем вместе.</b> Показываю раскадровку и черновик до чистового рендера, чтобы правки были в начале, а не в конце.</p>
+  </div>
+</section>
+
+<!-- УСЛУГИ -->
+<section class="section" id="services">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v3"></span>V3 · Услуги</p>
+    <h2>Что можем сделать вместе</h2>
+  </div>
+  <div class="services">
+    <article class="svc">
+      <span class="svc-i">01</span>
+      <h3>AI-реклама для бизнеса</h3>
+      <p>Ролик для товара, услуги или ЖК без дорогой съёмочной группы. Актёры, интерьеры и эффекты, которые обычно стоят сотни тысяч, собираются из генераций и реальных кадров.</p>
+      <ul><li>Reels и вертикальные ролики</li><li>ТВ-ролики 30 секунд</li><li>Сценарий и раскадровка</li></ul>
+    </article>
+    <article class="svc">
+      <span class="svc-i">02</span>
+      <h3>Монтаж под ключ</h3>
+      <p>Говорящие головы, клипы, промо, контент для блогов и экспертов. Титры в ритме речи, цвет, звук, мастера под каждую площадку.</p>
+      <ul><li>DaVinci Resolve</li><li>Цветокоррекция и звук</li><li>Динамичные титры и графика</li></ul>
+    </article>
+    <article class="svc">
+      <span class="svc-i">03</span>
+      <h3>AI × Реальность</h3>
+      <p>Гибрид: вы присылаете кадры с телефона или фото продукта, а нейросеть переносит их в другой мир. Формат, который досматривают и пересылают.</p>
+      <ul><li>Контент для соцсетей бренда</li><li>Спецпроекты и тизеры</li><li>Серии роликов</li></ul>
+    </article>
+    <article class="svc svc-learn">
+      <span class="svc-i">04</span>
+      <h3>Учу новичков</h3>
+      <p>Я научу вас делать такие ролики с нуля: снять на телефон, сгенерировать недостающее и смонтировать. Шаг за шагом, на ваших задачах.</p>
+      <ul><li>Промпты и разборы в Telegram</li><li>Личные созвоны и разбор работ</li></ul>
+      <a href="https://t.me/nik_edit_ai" target="_blank" rel="noopener" class="link">Канал @nik_edit_ai →</a>
+    </article>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section class="section" id="reviews">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-a1"></span>A1 · Отзывы</p>
+    <h2>Что говорят те, с кем работал</h2>
+  </div>
+  <div class="reviews">
+    <figure class="rev rev-video">
+      <button class="rev-circle" data-play="review-khokhlov" aria-label="Смотреть видеоотзыв Славы Хохлова">
+        <img src="media/review-khokhlov.jpg" alt="">
+        <span class="rev-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      </button>
+      <figcaption>
+        <p class="rev-quote">«Он один из тех творцов, кто очень круто подходит к реализации проектов. Он у нас в списке крутых подрядчиков, с которыми мы с удовольствием готовы работать.»</p>
+        <p class="rev-who"><b>Слава Хохлов</b>руководитель видеопродакшна (Сбербанк, 1С, Первый канал, Газпром), автор YouTube-канала «Хохлов Сабатовский» · видеоотзыв 0:58</p>
+      </figcaption>
+    </figure>
+    <figure class="rev">
+      <p class="rev-quote">«Одно из лучших рабочих взаимодействий, что у меня было, а я в этой сфере работал со многими людьми. За любую задачу берётся с горящими глазами, не боится экспериментировать и всегда доводит начатое до результата.»</p>
+      <p class="rev-who"><b>Продюсер видеопродакшна</b>совместные проекты по AI-контенту · имя по запросу (NDA)</p>
+    </figure>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contact" id="contact">
+  <p class="track-label"><span class="dot dot-v1"></span>OUT · Рендер</p>
+  <h2>Сделаем ваш ролик?</h2>
+  <p class="lead">Напишите, какой ролик нужен. Разберём задачу, покажу раскадровку и скажу, сколько это стоит.</p>
+  <div class="contact-links">
+    <a href="https://t.me/NikEditAi" class="btn" target="_blank" rel="noopener">Telegram @NikEditAi</a>
+    <a href="https://instagram.com/nik.edit.ai" class="btn btn-ghost" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://t.me/nik_edit_ai" class="btn btn-ghost" target="_blank" rel="noopener">Канал</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span>© 2026 Никита Григорьев</span>
+  <span class="foot-tc">RENDER COMPLETE · 100%</span>
+</footer>
+
+<!-- Плеер -->
+<dialog class="player" id="player">
+  <div class="player-box">
+    <button class="player-x" id="playerClose" aria-label="Закрыть">×</button>
+    <div class="player-media" id="playerMedia"></div>
+    <div class="player-info" id="playerInfo"></div>
+  </div>
+</dialog>
+
+<script src="works.js?v=3"></script>
+<script src="app.js?v=3"></script>
+</body>
+</html>
