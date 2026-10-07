@@ -89,5 +89,6 @@ window.WORKS = [
 // Ролики, которые открываются в плеере, но не стоят в сетке
 window.EXTRA = {
   "showreel-h": { id: "showreel-h", o: "h", tag: "Шоурил", title: "Шоурил 2026", line: "Лучшее из работ за 34 секунды." },
-  "review-khokhlov": { id: "review-khokhlov", o: "square", tag: "Видеоотзыв", title: "Слава Хохлов", line: "Руководитель видеопродакшна, автор YouTube-канала «Хохлов Сабатовский»." }
+  "review-khokhlov": { id: "review-khokhlov", o: "square", tag: "Видеоотзыв", title: "Слава Хохлов", line: "Руководитель видеопродакшна, автор YouTube-канала «Хохлов Сабатовский»." },
+  "review-zgibnev": { id: "review-zgibnev", o: "square", tag: "Видеоотзыв", title: "Дмитрий Згибнев", line: "Монтажёр, автор YouTube-канала про DaVinci Resolve @zgibnev_blog." }
 };
