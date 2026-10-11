@@ -40,7 +40,7 @@
       aria-label="${w.title}. ${w.tag}. ${w.dur}">
       <img src="media/${w.id}.jpg" alt="" loading="lazy">
       <video muted loop playsinline preload="none" data-src="media/${w.id}-loop.mp4"></video>
-      <div class="card-top"><span class="tag ${w.cat.includes("air") ? "tag-ai" : w.cat.includes("edit") ? "tag-edit" : "tag-real"}">${w.tag}</span><span class="card-dur">${w.dur}</span></div>
+      <div class="card-top"><span class="tag ${w.cat.includes("air") || w.cat.includes("learn") ? "tag-ai" : w.cat.includes("edit") ? "tag-edit" : "tag-real"}">${w.tag}</span><span class="card-dur">${w.dur}</span></div>
       <div class="card-body"><h3>${w.title}</h3><p>${w.line}</p></div>
     </article>`;
   const LIVE = WORKS.filter(w => w.pub); // только то, что уже вышло в соцсетях
@@ -126,7 +126,11 @@
     media.innerHTML = `<video src="media/${w.id}.mp4" poster="media/${w.id}.jpg" controls autoplay playsinline></video>`;
     const rows = [["Задача", w.task], ["Что сделал", w.did], ["Инструменты", w.tools]]
       .filter(r => r[1]).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
-    info.innerHTML = `<span class="tag tag-real">${w.tag}</span><h3>${w.title}</h3>${rows ? `<dl>${rows}</dl>` : `<p>${w.line}</p>`}`;
+    // у уроков - кнопка на пост с полным уроком в Telegram (если ссылки ещё нет - на канал)
+    const tg = w.cat && w.cat.includes("learn")
+      ? `<a class="btn player-tg" href="${w.tg || "https://t.me/nik_edit_ai"}" target="_blank" rel="noopener">Смотреть полный урок в Telegram →</a>`
+      : "";
+    info.innerHTML = `<span class="tag tag-real">${w.tag}</span><h3>${w.title}</h3>${tg}${rows ? `<dl>${rows}</dl>` : `<p>${w.line}</p>`}`;
     dlg.showModal();
   }
   function closePlayer() { const v = $("video", media); if (v) v.pause(); media.innerHTML = ""; dlg.close(); }

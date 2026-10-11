@@ -334,3 +334,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.02
   .card { opacity: 1; transform: none; }
   .tl-clip { transform: none; }
 }
+
+/* Кнопка «полный урок в Telegram» в плеере урока */
+.player-tg { margin: 4px 0 22px; background: linear-gradient(90deg, var(--real), var(--ai)); color: #fff; }
+.player-tg:hover { box-shadow: 0 10px 30px -10px var(--ai); }
