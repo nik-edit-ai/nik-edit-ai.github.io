@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как сделано · nik.edit.ai</title>
+<meta name="description" content="Разбор AI-ролика: реальный кадр, генерация и монтаж по шагам, с промптом.">
+<meta property="og:title" content="Как сделано · nik.edit.ai">
+<meta property="og:description" content="Реальный кадр против AI-кадра, шаги и промпт.">
+<meta property="og:image" content="https://nik-edit-ai.github.io/media/og.jpg">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0c0b'/%3E%3Crect x='7' y='8' width='8' height='16' rx='2' fill='%23ff7a2e'/%3E%3Crect x='17' y='8' width='8' height='16' rx='2' fill='%23ff3ea5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=8">
+</head>
+<body>
+
+<header class="bar">
+  <a href="index.html" class="logo" aria-label="nik.edit.ai, на главную">
+    <span class="logo-mark"><i></i><i></i></span>nik.edit.ai
+  </a>
+  <nav class="nav">
+    <a href="index.html#works">Работы</a>
+    <a href="index.html#approach">Подход</a>
+    <a href="index.html#services">Услуги</a>
+    <a href="index.html#reviews">Отзывы</a>
+  </nav>
+  <a href="https://t.me/NikEditAi" class="btn btn-sm" target="_blank" rel="noopener">Написать</a>
+</header>
+
+<main id="top" class="case">
+
+<!-- Шапка кейса: текст + шов -->
+<section class="hero case-hero">
+  <div class="hero-text">
+    <a class="case-back" href="index.html#works">← Все работы</a>
+    <p class="eyebrow"><span class="tag tag-ai" id="caseTag"></span></p>
+    <h1 id="caseTitle"></h1>
+    <p class="lead" id="caseLine"></p>
+    <dl class="case-meta">
+      <div><dt>Задача</dt><dd id="caseTask"></dd></div>
+      <div><dt>Инструменты</dt><dd id="caseTools"></dd></div>
+    </dl>
+    <div class="hero-cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Смотреть ролик</a>
+      <a href="https://t.me/NikEditAi" class="btn btn-ghost" target="_blank" rel="noopener">Хочу такой ролик</a>
+    </div>
+  </div>
+
+  <figure class="seam" id="seam" aria-label="Сравнение: реальный кадр и тот же кадр после нейросети">
+    <img id="seamAi" alt="" class="seam-ai" draggable="false">
+    <div class="seam-real"><img id="seamReal" alt="" draggable="false"></div>
+    <div class="seam-line"><span class="seam-knob" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+    <span class="tag tag-real seam-tag-l" id="seamTagL"></span>
+    <span class="tag tag-ai seam-tag-r" id="seamTagR"></span>
+    <input type="range" min="0" max="100" value="50" id="seamRange" class="seam-range" aria-label="Положение шва между реальностью и AI">
+    <figcaption id="seamCap"></figcaption>
+  </figure>
+</section>
+
+<!-- Как сделано -->
+<section class="section case-sec">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v2"></span>V2 · Как сделано</p>
+    <h2>От кадра с телефона до готового ролика</h2>
+  </div>
+  <ol class="steps case-steps" id="caseSteps"></ol>
+</section>
+
+<!-- Промпт -->
+<section class="section case-sec">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v3"></span>V3 · Промпт</p>
+    <h2>Ключевой промпт</h2>
+    <p class="sec-sub">Берите и пробуйте на своём кадре. Если получится, кидайте в Telegram, посмотрю)</p>
+  </div>
+  <div class="prompt" id="prompt1"></div>
+  <details class="prompt-more" id="prompt2wrap">
+    <summary>Промпт для видео целиком</summary>
+    <div class="prompt" id="prompt2"></div>
+  </details>
+</section>
+
+<!-- Ролик + заявка -->
+<section class="section case-sec" id="film">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-v1"></span>V1 · Ролик</p>
+    <h2>Что получилось</h2>
+  </div>
+  <div class="case-film">
+    <div class="case-video" id="caseVideo"></div>
+    <a class="card-cta case-cta" href="https://t.me/NikEditAi" target="_blank" rel="noopener">
+      <span class="tag tag-ai">Ваш ролик</span>
+      <div><h3>Хочу такой ролик</h3><p>Пришлите кадр с телефона или фото продукта. Покажу раскадровку и скажу, во что его можно превратить.</p></div>
+      <span class="btn">Написать в Telegram @NikEditAi</span>
+    </a>
+  </div>
+</section>
+
+<!-- Другие кейсы -->
+<section class="section case-sec" id="more">
+  <div class="sec-head">
+    <p class="track-label"><span class="dot dot-a1"></span>A1 · Ещё разборы</p>
+    <h2>Другие кейсы</h2>
+  </div>
+  <div class="case-more" id="caseMore"></div>
+</section>
+
+<section class="contact">
+  <p class="track-label"><span class="dot dot-v1"></span>OUT · Рендер</p>
+  <h2>Сделаем ваш ролик?</h2>
+  <p class="lead">Напишите, какой ролик нужен. Разберём задачу, покажу раскадровку и скажу, сколько это стоит.</p>
+  <div class="contact-links">
+    <a href="https://t.me/NikEditAi" class="btn" target="_blank" rel="noopener">Telegram @NikEditAi</a>
+    <a href="index.html#works" class="btn btn-ghost">Все работы</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span>© 2026 Никита Григорьев</span>
+  <span class="foot-tc">RENDER COMPLETE · 100%</span>
+</footer>
+
+<script src="works.js?v=8"></script>
+<script src="case.js?v=8"></script>
+</body>
+</html>

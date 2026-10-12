@@ -335,6 +335,60 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.02
   .tl-clip { transform: none; }
 }
 
+/* ---------- Страница кейса «как сделано» ---------- */
+.case-back { display: inline-block; margin-bottom: 22px; font: 600 13px var(--mono); color: var(--muted); text-decoration: none; }
+.case-back:hover { color: var(--text); }
+.case-hero .eyebrow { margin-bottom: 20px; }
+.case-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 15px; color: #cfc6ba; }
+.case-meta dt { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.case-sec .sec-head { margin-bottom: 32px; }
+.case-steps { grid-template-columns: repeat(4, 1fr); }
+
+.prompt { border-radius: var(--radius); background: var(--bg-2); box-shadow: 0 0 0 1px var(--line); overflow: hidden; }
+.prompt-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); font: 600 12px/1.4 var(--mono); color: var(--muted); }
+.prompt-copy { flex: none; padding: .55em 1em; border-radius: 999px; font: 600 12px var(--mono); color: var(--ai); box-shadow: inset 0 0 0 1px rgba(255,62,165,.55); }
+.prompt-copy:hover { background: var(--ai); color: var(--bg); }
+.prompt pre { margin: 0; padding: 20px 18px; font: 400 14px/1.65 var(--mono); color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
+.prompt-more { margin-top: 14px; }
+.prompt-more summary { cursor: pointer; padding: 14px 4px; font-weight: 700; color: var(--ai); list-style: none; }
+.prompt-more summary::-webkit-details-marker { display: none; }
+.prompt-more summary::before { content: "+ "; }
+.prompt-more[open] summary::before { content: "− "; }
+
+.case-film { display: grid; grid-template-columns: auto minmax(0, 560px); gap: 18px; align-items: stretch; }
+.case-video video { border-radius: var(--radius); background: #000; max-height: 80vh; }
+.case-video.v video { width: min(45vh, 100%); aspect-ratio: 9 / 16; }
+.case-cta { cursor: pointer; opacity: 1; transform: none; aspect-ratio: auto; }
+
+.case-more { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.case-link { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; aspect-ratio: 9 / 12; padding: 18px; border-radius: var(--radius); overflow: hidden; text-decoration: none; isolation: isolate; box-shadow: 0 0 0 1px var(--line); }
+.case-link img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.case-link::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.88)); }
+.case-link:hover img { transform: scale(1.04); }
+.case-link .tag { align-self: flex-start; }
+.case-link h3 { font-size: clamp(17px, 1.5vw, 22px); }
+.case-link .link { margin-top: 0; }
+
+/* Ссылка на разбор: в плеере и на карточке */
+.player-case { margin: 4px 0 22px; }
+.card-case { display: inline-block; margin-bottom: 10px; font: 600 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .6em .8em; border-radius: 6px; background: var(--ai); color: #fff; text-decoration: none; }
+
+@media (max-width: 1100px) {
+  .case-steps { grid-template-columns: repeat(2, 1fr); }
+  .case-more { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .case-film { grid-template-columns: 1fr; }
+  .case-video.v video { width: 100%; max-width: 420px; }
+  .case-steps { grid-template-columns: 1fr; }
+  .case-more { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .case-meta { grid-template-columns: 1fr; gap: 16px; }
+  .prompt pre { font-size: 13px; padding: 16px 14px; }
+  .prompt-head { padding: 12px 14px; }
+}
+
 /* Кнопка «полный урок в Telegram» в плеере урока */
 .player-tg { margin: 4px 0 22px; background: linear-gradient(90deg, var(--real), var(--ai)); color: #fff; }
 .player-tg:hover { box-shadow: 0 10px 30px -10px var(--ai); }
