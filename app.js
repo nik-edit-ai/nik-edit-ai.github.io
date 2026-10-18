@@ -33,23 +33,77 @@
     })(t0);
   }
 
-  /* ---------- Сетка работ ---------- */
-  const grid = $("#grid");
-  const card = w => `
-    <article class="card ${w.o}" tabindex="0" role="button" data-id="${w.id}" data-cat="${w.cat.join(" ")}"
-      aria-label="${w.title}. ${w.tag}. ${w.dur}">
-      <img src="media/${w.id}.jpg" alt="" loading="lazy">
-      <video muted loop playsinline preload="none" data-src="media/${w.id}-loop.mp4"></video>
-      <div class="card-top"><span class="tag ${w.cat.includes("air") || w.cat.includes("learn") ? "tag-ai" : w.cat.includes("edit") ? "tag-edit" : "tag-real"}">${w.tag}</span><span class="card-dur">${w.dur}</span></div>
-      <div class="card-body">${w.case ? `<a class="card-case" href="case.html?id=${w.id}">Как сделано →</a>` : ""}<h3>${w.title}</h3><p>${w.line}</p></div>
-    </article>`;
+  /* ---------- Работы: разделы по тому, что заказывают ---------- */
+  // Работа попадает в первый подходящий раздел (реклама важнее остального)
+  const GROUPS = [
+    { id: "ads", name: "Реклама для бизнеса",
+      line: "Ролики для товаров, брендов и ЖК: сценарий, генерации, звук и мастер под площадку, от Reels до эфира." },
+    { id: "air", name: "AI × Реальность",
+      line: "Мой формат: реальный кадр с телефона, а нейросеть дорисовывает то, что камера снять не может." },
+    { id: "ai", name: "Полностью AI",
+      line: "Всё сгенерировано: герои, места и свет. Ролик держится на сценарии, ритме и звуке." },
+    { id: "edit", name: "Монтаж",
+      line: "Говорящие головы, клипы и атмосферные ролики из готовых исходников: титры, цвет, звук." },
+    { id: "learn", name: "Обучение",
+      line: "Уроки по нейросетям для новичков, 14-15 роликов в месяц для онлайн-платформы. Полные уроки - в Telegram." },
+  ];
   const LIVE = WORKS.filter(w => w.pub); // только то, что уже вышло в соцсетях
-  grid.innerHTML = LIVE.map(card).join("") + `
-    <a class="card card-cta" href="https://t.me/NikEditAi" target="_blank" rel="noopener">
-      <span class="tag tag-ai">Следующий ролик</span>
-      <div><h3>Здесь может быть ваш ролик</h3><p>Расскажите задачу, покажу раскадровку.</p></div>
-      <span class="btn">Написать в Telegram</span>
-    </a>`;
+  const groupOf = w => (GROUPS.find(g => w.cat.includes(g.id)) || GROUPS[2]).id;
+  const plural = n => n % 10 === 1 && n % 100 !== 11 ? "работа"
+    : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? "работы" : "работ";
+
+  const card = w => `
+    <article class="wk ${w.o}" tabindex="0" role="button" data-id="${w.id}" aria-label="${w.title}. ${w.tag}. ${w.dur}">
+      <div class="wk-media">
+        <img src="media/${w.id}.jpg" alt="" loading="lazy">
+        <video muted loop playsinline preload="none" data-src="media/${w.id}-loop.mp4"></video>
+        <span class="wk-dur">${w.dur}</span>
+        ${w.case ? `<span class="wk-badge">Как сделано</span>` : ""}
+        <span class="wk-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+      <div class="wk-info">
+        <span class="wk-tag">${w.tag}</span>
+        <h4>${w.title}</h4>
+        <p>${w.line}</p>
+        ${w.case ? `<a class="wk-case" href="case.html?id=${w.id}">Разбор и промпт →</a>` : ""}
+      </div>
+    </article>`;
+
+  const groupsEl = $("#groups"), catsEl = $("#cats");
+  const live = GROUPS.map(g => ({ ...g, items: LIVE.filter(w => groupOf(w) === g.id) })).filter(g => g.items.length);
+  catsEl.innerHTML = live.map(g =>
+    `<a class="cat" href="#g-${g.id}">${g.name}<span>${g.items.length}</span></a>`).join("");
+  groupsEl.innerHTML = live.map((g, i) => `
+    <div class="group" id="g-${g.id}">
+      <div class="group-head">
+        <span class="group-n">${String(i + 1).padStart(2, "0")}</span>
+        <div class="group-title">
+          <h3>${g.name} <small>${g.items.length} ${plural(g.items.length)}</small></h3>
+          <p>${g.line}</p>
+        </div>
+        <div class="group-arrows">
+          <button class="arr" data-dir="-1" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="arr" data-dir="1" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="rail">${g.items.map(card).join("")}</div>
+    </div>`).join("");
+
+  // Стрелки ленты: прячем, если всё и так помещается; гасим на краях
+  $$(".group").forEach(gr => {
+    const rail = $(".rail", gr), arrows = $$(".arr", gr);
+    const upd = () => {
+      const over = rail.scrollWidth > rail.clientWidth + 4;
+      $(".group-arrows", gr).hidden = !over;
+      arrows[0].disabled = rail.scrollLeft < 4;
+      arrows[1].disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 4;
+    };
+    arrows.forEach(a => a.addEventListener("click", () =>
+      rail.scrollBy({ left: +a.dataset.dir * rail.clientWidth * 0.8, behavior: reduced ? "auto" : "smooth" })));
+    rail.addEventListener("scroll", upd, { passive: true });
+    new ResizeObserver(upd).observe(rail);
+    upd();
+  });
 
   const startLoop = el => {
     const v = $("video", el);
@@ -58,49 +112,23 @@
   };
   const stopLoop = el => { const v = $("video", el); v.pause(); el.classList.remove("playing"); };
 
-  $$(".card:not(.card-cta)").forEach(el => {
-    el.addEventListener("click", e => { if (!e.target.closest(".card-case")) openPlayer(el.dataset.id); });
+  $$(".wk").forEach(el => {
+    el.addEventListener("click", e => { if (!e.target.closest(".wk-case")) openPlayer(el.dataset.id); });
     el.addEventListener("keydown", e => { if (e.target !== el) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPlayer(el.dataset.id); } });
     if (canHover) {
       el.addEventListener("mouseenter", () => startLoop(el));
       el.addEventListener("mouseleave", () => stopLoop(el));
     }
   });
-
-  // Появление карточек и петли на тач-экранах, когда карточка в центре экрана
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add("in"); }
-  }), { threshold: .12 });
-  $$(".card").forEach(c => io.observe(c));
+  // На телефоне петля играет у карточки, которая в центре экрана
   if (!canHover && !reduced) {
     const center = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? startLoop(e.target) : stopLoop(e.target)),
-      { rootMargin: "-35% 0px -35% 0px" });
-    $$(".card:not(.card-cta)").forEach(c => center.observe(c));
+      { rootMargin: "-35% -20% -35% -20%" });
+    $$(".wk").forEach(c => center.observe(c));
   }
-
-  // Карточка-приглашение добивает последний ряд до полной ширины
-  const cta = $(".card-cta");
-  function fitCta() {
-    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
-    const used = $$(".card:not(.card-cta):not(.hidden)").reduce((n, c) => n + (c.classList.contains("h") ? Math.min(2, cols) : 1), 0);
-    const span = cols - (used % cols) || cols;
-    cta.style.gridColumn = `span ${span}`;
-    cta.classList.toggle("tall", span === 1);
-  }
-  fitCta();
-  addEventListener("resize", fitCta);
-  new ResizeObserver(fitCta).observe(grid); // ловит и поворот экрана, и смену ширины без события resize
-
-  // Фильтры: пустые категории прячем
-  $$(".chip").forEach(ch => {
-    const f = ch.dataset.filter;
-    if (f !== "all" && !LIVE.some(w => w.cat.includes(f))) ch.hidden = true;
-  });
-  $$(".chip").forEach(ch => ch.addEventListener("click", () => {
-    $$(".chip").forEach(c => { c.classList.toggle("is-on", c === ch); c.setAttribute("aria-selected", c === ch); });
-    const f = ch.dataset.filter;
-    $$(".card").forEach(c => c.classList.toggle("hidden", f !== "all" && !(c.dataset.cat || "").split(" ").includes(f)));
-  }));
+  // Разделы мягко проявляются при прокрутке
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add("in")), { threshold: .15 });
+  $$(".group").forEach(g => io.observe(g));
 
   /* ---------- Таймлайн подхода: плейхед едет по прокрутке ---------- */
   const tl = $("#tl"), head = $("#tlHead");
@@ -120,7 +148,7 @@
   function openPlayer(id) {
     const w = WORKS.find(x => x.id === id) || EXTRA[id];
     if (!w) return;
-    $$(".card.playing").forEach(stopLoop);
+    $$(".wk.playing").forEach(stopLoop);
     dlg.className = "player " + w.o;
     media.className = "player-media " + w.o;
     media.innerHTML = `<video src="media/${w.id}.mp4" poster="media/${w.id}.jpg" controls autoplay playsinline></video>`;

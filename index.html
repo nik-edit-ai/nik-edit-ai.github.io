@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -82,21 +82,22 @@
   </div>
 </section>
 
-<!-- РАБОТЫ -->
+<!-- РАБОТЫ: разделы по тому, что заказывают -->
 <section class="section" id="works">
   <div class="sec-head">
     <p class="track-label"><span class="dot dot-v1"></span>V1 · Работы</p>
-    <h2>Реальные кадры, генерации и монтаж, который их склеивает</h2>
+    <h2>Что я делаю</h2>
+    <p class="sec-sub">Пять направлений - выберите нужное. Ленту можно листать, ролик открывается со звуком по нажатию.</p>
   </div>
-  <div class="filters" role="tablist" aria-label="Фильтр работ">
-    <button class="chip is-on" data-filter="all" role="tab" aria-selected="true">Все</button>
-    <button class="chip" data-filter="air" role="tab" aria-selected="false">AI × Реальность</button>
-    <button class="chip" data-filter="ads" role="tab" aria-selected="false">Реклама</button>
-    <button class="chip" data-filter="ai" role="tab" aria-selected="false">Полностью AI</button>
-    <button class="chip" data-filter="edit" role="tab" aria-selected="false">Монтаж</button>
-    <button class="chip" data-filter="learn" role="tab" aria-selected="false">Обучение</button>
+  <nav class="cats" id="cats" aria-label="Разделы работ"></nav>
+  <div id="groups"></div>
+  <div class="works-cta">
+    <div>
+      <h3>Нужен похожий ролик?</h3>
+      <p>Расскажите задачу - покажу раскадровку и скажу, сколько это стоит.</p>
+    </div>
+    <a href="https://t.me/NikEditAi" class="btn" target="_blank" rel="noopener">Написать в Telegram</a>
   </div>
-  <div class="grid" id="grid"></div>
 </section>
 
 <!-- ПОДХОД -->
@@ -241,7 +242,7 @@
   </div>
 </dialog>
 
-<script src="works.js?v=9"></script>
-<script src="app.js?v=9"></script>
+<script src="works.js?v=10"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>
