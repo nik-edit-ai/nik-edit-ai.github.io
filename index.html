@@ -11,12 +11,12 @@
 <meta property="og:url" content="https://nik-edit-ai.github.io/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d0c0b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0c0b'/%3E%3Crect x='7' y='8' width='8' height='16' rx='2' fill='%23ff7a2e'/%3E%3Crect x='17' y='8' width='8' height='16' rx='2' fill='%23ff3ea5'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08070b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308070b'/%3E%3Crect x='7' y='8' width='8' height='16' rx='2' fill='%23c4b5fd'/%3E%3Crect x='17' y='8' width='8' height='16' rx='2' fill='%23a855f7'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 
@@ -57,17 +57,16 @@
     </ul>
   </div>
 
-  <figure class="seam" id="seam" aria-label="Сравнение: реальный кадр и тот же кадр после нейросети">
-    <img src="media/hero-ai.jpg" alt="Тот же двор в стиле Vice City: неон, пальмы, розовый закат" class="seam-ai" draggable="false">
-    <div class="seam-real" id="seamReal">
-      <img src="media/hero-real.jpg" alt="Двор в Петербурге, снято на iPhone" draggable="false">
-    </div>
+  <figure class="seam" id="seam" aria-label="Сравнение: реальный дубль и тот же дубль после нейросети">
+    <!-- hero-nmp.mp4: слева реальная съёмка, справа тот же дубль после нейросети (480x854 каждая половина), рисуем на canvas по шву -->
+    <video id="seamVideo" src="media/hero-nmp.mp4" poster="media/hero-nmp.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+    <canvas id="seamCanvas" width="480" height="854"></canvas>
     <div class="seam-line" id="seamLine"><span class="seam-knob" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
     <span class="tag tag-real seam-tag-l">Реальность · iPhone</span>
-    <span class="tag tag-ai seam-tag-r">AI · Vice City</span>
+    <span class="tag tag-ai seam-tag-r">AI · нейросеть</span>
     <input type="range" min="0" max="100" value="50" id="seamRange" class="seam-range" aria-label="Положение шва между реальностью и AI">
-    <figcaption>Тяни шов. Один и тот же кадр: слева снято во дворе в Питере, справа - после нейросети. <a href="#" data-play="gta">Смотреть ролик →</a></figcaption>
+    <figcaption>Тяни шов. Один и тот же дубль: слева снято на пирсе у ЗСД, справа - после нейросети. <a href="#" data-play="nemoya">Смотреть ролик →</a></figcaption>
   </figure>
 </section>
 
@@ -242,7 +241,7 @@
   </div>
 </dialog>
 
-<script src="works.js?v=10"></script>
-<script src="app.js?v=10"></script>
+<script src="works.js?v=11"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

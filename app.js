@@ -18,10 +18,25 @@
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Шов реальность / AI ---------- */
+  /* ---------- Шов реальность / AI: одно видео «бок о бок», режем по шву на canvas ---------- */
   const seam = $("#seam"), range = $("#seamRange");
-  const setPos = v => seam.style.setProperty("--pos", v + "%");
+  const sv = $("#seamVideo"), cv = $("#seamCanvas"), cx = cv.getContext("2d");
+  const poster = new Image();
+  poster.src = "media/hero-nmp.jpg";
+  let pos = 50;
+  const HW = 480, HH = 854;                 // размер одной половины в видео
+  function drawSeam() {
+    const src = sv.readyState >= 2 ? sv : (poster.complete && poster.naturalWidth ? poster : null);
+    if (!src) return;
+    const x = Math.round(HW * pos / 100);
+    cx.drawImage(src, 0, 0, x, HH, 0, 0, x, HH);                  // реальность слева от шва
+    cx.drawImage(src, HW + x, 0, HW - x, HH, x, 0, HW - x, HH);   // генерация справа от шва
+  }
+  const setPos = v => { pos = +v; seam.style.setProperty("--pos", v + "%"); drawSeam(); };
   range.addEventListener("input", () => { setPos(range.value); seam.dataset.touched = 1; });
+  poster.onload = drawSeam;
+  (function loop() { if (!sv.paused || sv.readyState >= 2) drawSeam(); requestAnimationFrame(loop); })();
+  if (reduced) sv.pause();
   // Лёгкое «дыхание» шва, пока посетитель его не тронул
   if (!reduced) {
     const t0 = performance.now();
@@ -34,21 +49,22 @@
   }
 
   /* ---------- Работы: разделы по тому, что заказывают ---------- */
-  // Работа попадает в первый подходящий раздел (реклама важнее остального)
+  // Порядок разделов = порядок на странице; работа попадает в раздел по приоритету PRIORITY
   const GROUPS = [
-    { id: "ads", name: "Реклама для бизнеса",
-      line: "Ролики для товаров, брендов и ЖК: сценарий, генерации, звук и мастер под площадку, от Reels до эфира." },
     { id: "air", name: "AI × Реальность",
       line: "Мой формат: реальный кадр с телефона, а нейросеть дорисовывает то, что камера снять не может." },
     { id: "ai", name: "Полностью AI",
       line: "Всё сгенерировано: герои, места и свет. Ролик держится на сценарии, ритме и звуке." },
     { id: "edit", name: "Монтаж",
       line: "Говорящие головы, клипы и атмосферные ролики из готовых исходников: титры, цвет, звук." },
+    { id: "ads", name: "Реклама для бизнеса",
+      line: "Ролики для товаров, брендов и ЖК: сценарий, генерации, звук и мастер под площадку, от Reels до эфира." },
     { id: "learn", name: "Обучение",
       line: "Уроки по нейросетям для новичков, 14-15 роликов в месяц для онлайн-платформы. Полные уроки - в Telegram." },
   ];
   const LIVE = WORKS.filter(w => w.pub); // только то, что уже вышло в соцсетях
-  const groupOf = w => (GROUPS.find(g => w.cat.includes(g.id)) || GROUPS[2]).id;
+  const PRIORITY = ["ads", "learn", "air", "ai", "edit"];   // реклама важнее остального: Спиннер (ads+ai) - в рекламу
+  const groupOf = w => PRIORITY.find(id => w.cat.includes(id)) || "ai";
   const plural = n => n % 10 === 1 && n % 100 !== 11 ? "работа"
     : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? "работы" : "работ";
 
