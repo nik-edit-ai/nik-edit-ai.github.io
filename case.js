@@ -62,9 +62,11 @@
       }).catch(() => {});
     });
   };
-  promptBox($("#prompt1"), c.promptTitle, c.prompt);
-  if (c.prompt2) promptBox($("#prompt2"), c.prompt2Title, c.prompt2);
-  else $("#prompt2wrap").remove();
+  if (c.prompt) {
+    promptBox($("#prompt1"), c.promptTitle, c.prompt);
+    if (c.prompt2) promptBox($("#prompt2"), c.prompt2Title, c.prompt2);
+    else $("#prompt2wrap").remove();
+  } else $("#promptSec").remove(); // промпта пока нет - скрываем весь блок
 
   /* ---------- Ролик ---------- */
   $("#caseVideo").className = "case-video " + w.o;
