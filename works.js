@@ -33,7 +33,19 @@ window.WORKS = [
         ["Первая попытка", "Хотел сделать всё одной генерацией и загрузил весь монтаж целиком. Нейросеть выкинула половину планов, вместо моего лица поставила картинку льда и придумала чужую руку. Около 90 кредитов в мусор."],
         ["По планам", "Пошёл по-другому: каждый план отдельно, от стоп-кадра - сначала картинка, потом из неё видео. Сыр, который ветер подгоняет к камере, и пингвина в конце придумали уже по ходу. Третью руку и сыр, который каждый раз ложился в новое место, ловили и правили."],
         ["Монтаж", "Итого около 200 кредитов и 4 версии монтажа. Цвет, музыку и звуки собирал в DaVinci Resolve."]
-      ]
+      ],
+      promptTitle: "Картинка, Nano Banana Pro · @image1 - стоп-кадр с открытой дверью, 9:16",
+      prompt: `Edit @image1. Keep the kitchen, the fridge door, the man and the camera framing exactly the same. Inside the open fridge, instead of shelves, show an endless frozen land: glaciers and ice mountains far away, a green aurora in a deep blue night sky, a snowstorm blowing toward the camera. Cold blue light spills from the fridge onto the floor and the man. Photorealistic. No text.`,
+      prompt2Title: "Видео, Seedance Edit · @video1 - свой дубль, @image1 - картинка ледяной страны, 5 сек",
+      prompt2: `Keep the man, his pose, all his movements and the camera exactly as in the video. Keep the kitchen exactly as in the video.
+Inside the open fridge there is the endless frozen land from @image1: glaciers, aurora, a snowstorm. Strong wind blows snow out of the fridge into the dark kitchen, cold blue light from the fridge lights him. When he reaches inside, he pulls out a sausage frozen in a clear block of ice.
+Photorealistic, no text.
+
+- - - Пингвин в финале (второй проход, 4 сек) - - -
+
+Keep the man, his pose, all his movements and the camera exactly as in the video. Keep the kitchen exactly as in the video.
+A small penguin like @image1 stands on the kitchen floor at his feet, looks up at him and tilts its head. A few snowflakes slowly fall.
+Photorealistic, no text.`
     }
   },
   {
@@ -53,7 +65,16 @@ window.WORKS = [
         ["Одна генерация", "Сначала сам смонтировал ролик, потом взял кадр, где беру банку, и кадр, где уже стою с ней на кухне, и одной генерацией в Seedance на 5 секунд дорисовал между ними полёт: воронка, Земля, восход и обратно домой."],
         ["Картинка", "Наложил космический фильтр со свечением - выглядело так, будто снято непонятно на что. Убрал и оставил чистую картинку."],
         ["Монтаж", "Музыку сгенерировал в Suno: уютный лоуфай, который на вспышке взрывается в эпичный космос и резко возвращается на кухню. Звуки полёта, глотки и цвет собирал в DaVinci Resolve."]
-      ]
+      ],
+      promptTitle: "Картинка, Nano Banana Pro · @image1 - фото на ровном фоне, @image2 - карточка персонажа, 9:16",
+      prompt: `Edit @image1. Keep the man's face, his t-shirt and the beer can in his hand exactly the same as in @image1 and @image2. He floats weightless in open space, arms slightly spread, the Earth fills the lower half of the frame, the sun rises over the edge of the planet. Photorealistic, cinematic. No text.`,
+      prompt2Title: "Видео, Seedance Keyframes · 4 сек, первый и последний кадр",
+      prompt2: `Туда:
+The moment his fingers touch the frozen can, the freezer turns into a swirling vortex of stars and blue light and pulls him inside, the camera flies after him into open space and circles around him as he floats over the Earth. End exactly on the last frame. Photorealistic, no text.
+
+- - - Обратно - - -
+
+He drifts over the Earth for a moment, then the space around him spins into a vortex of stars that shrinks into an open home freezer, and he lands standing in front of it in the kitchen. End exactly on the last frame. Photorealistic, no text.`
     }
   },
   {
