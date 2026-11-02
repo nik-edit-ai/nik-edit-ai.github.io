@@ -13,6 +13,8 @@
   document.title = `${w.title} · как сделано · nik.edit.ai`;
   $('meta[name="description"]').content = `${w.line} Разбор по шагам и промпт.`;
   $('meta[property="og:title"]').content = `${w.title} · как сделано`;
+  $('meta[property="og:description"]').content = w.line;
+  $('meta[property="og:image"]').content = `https://nik-edit-ai.github.io/media/${w.id}.jpg`;
 
   $("#caseTag").textContent = w.tag;
   $("#caseTitle").textContent = w.title.replace(/ (\S{1,3})$/, " $1"); // «GTA 6»: короткое слово не остаётся одно на строке

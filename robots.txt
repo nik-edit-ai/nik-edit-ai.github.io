@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nik-edit-ai.github.io/sitemap.xml

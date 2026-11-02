@@ -184,4 +184,29 @@
   dlg.addEventListener("click", e => { if (e.target === dlg) closePlayer(); });
   dlg.addEventListener("cancel", e => { e.preventDefault(); closePlayer(); });
   $$("[data-play]").forEach(b => b.addEventListener("click", e => { e.preventDefault(); openPlayer(b.dataset.play); }));
+
+  /* ---------- Копирование шаблона заявки ---------- */
+  const briefBtn = $("#briefCopy");
+  if (briefBtn) {
+    const BRIEF = [
+      "Заявка на ролик:",
+      "- Тип ролика: (AI-реклама / Reels / ТВ / монтаж)",
+      "- О чём ролик и для кого:",
+      "- Срок:",
+      "- Ссылка на пример, который нравится:",
+      "- Есть исходники (видео, лого, текст): да/нет"
+    ].join("\n");
+    briefBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(BRIEF);
+        briefBtn.textContent = "Скопировано ✓";
+      } catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = BRIEF; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+        briefBtn.textContent = "Скопировано ✓";
+      }
+      setTimeout(() => { briefBtn.textContent = "Скопировать шаблон заявки"; }, 2500);
+    });
+  }
 })();
